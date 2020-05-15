@@ -111,3 +111,48 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+
+let articles = document.querySelector(".articles");
+class ArticleMaker {
+  constructor(art) {
+    this.art = art;
+    this.house = document.createElement("div");
+    this.title = document.createElement("h2");
+    this.date = document.createElement("p");
+    this.p1 = document.createElement("p");
+    this.p2 = document.createElement("p");
+    this.p3 = document.createElement("p");
+    this.expand = document.createElement("span");
+    
+    this.house.classList.add("article");
+    articles.appendChild(this.house);
+    this.title.textContent = this.art.title;
+    this.house.appendChild(this.title);
+    
+    this.date.classList.add("date");
+    this.date.textContent = this.art.date;
+    this.house.appendChild(this.date);
+    
+    this.p1.textContent = this.art.firstParagraph;
+    this.house.appendChild(this.p1);
+    
+    this.p2.textContent = this.art.secondParagraph;
+    this.house.appendChild(this.p2);
+   
+    this.p3.textContent = this.art.thirdParagraph;
+    this.house.appendChild(this.p3);
+    
+    this.expand.textContent = "Open / Close";
+    this.expand.classList.add("expandButton");
+    this.house.appendChild(this.expand);
+    this.expand.addEventListener("click", this.articleOpen.bind(this));
+  }
+  articleOpen() {
+    this.house.classList.toggle("article-open");
+  }
+}
+
+data.map(cv => {
+  return new ArticleMaker(cv);
+});
